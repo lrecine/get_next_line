@@ -6,7 +6,7 @@
 /*   By: lrecine- <lrecine-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:29:09 by lrecine-          #+#    #+#             */
-/*   Updated: 2024/11/06 16:23:58 by lrecine-         ###   ########.fr       */
+/*   Updated: 2024/11/06 16:28:38 by lrecine-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ char	*ft_get_line(int fd, char *line)
 		free(line);
 		line = tmp;
 	}
-	free(buffer);
-	return (line);
+	return (free(buffer), line);
 }
 
 char	*get_next_line(int fd)
