@@ -6,7 +6,7 @@
 /*   By: lrecine- <lrecine-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:29:09 by lrecine-          #+#    #+#             */
-/*   Updated: 2024/11/06 13:54:40 by lrecine-         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:45:55 by lrecine-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ char	*ft_next_line(char *line)
 		return (NULL);
 	while (line[i] && line[i] != '\n')
 		i++;
-	next_line = (char *)malloc(i + 2);
+	if (line[i] == '\n')
+		i++;
+	next_line = (char *)malloc(i + 1);
 	if (!next_line)
 		return (NULL);
 	i = 0;
@@ -66,20 +68,31 @@ char	*get_next_line(int fd)
 {
 	static char	*line;
 	char		*next_line;
-	char		buffer[BUFFER_SIZE + 1];
+	char		*buffer;
 	int			read_bytes;
+	char		*tmp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	read_bytes = 1;
+	if (line == NULL)
+		line = ft_strdup("");
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (free(line), line = NULL);
 	while (!ft_strchr(line, '\n') && read_bytes > 0)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes == -1)
-			return (NULL);
+		if (read_bytes < 0)
+			return (free(line), free(buffer), line = NULL);
+		if (read_bytes == 0)
+			break ;
 		buffer[read_bytes] = '\0';
-		line = ft_strjoin(line, buffer);
+		tmp = ft_strjoin(line, buffer);
+		free(line);
+		line = tmp;
 	}
+	free(buffer);
 	if (!line)
 		return (NULL);
 	next_line = ft_next_line(line);

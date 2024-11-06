@@ -6,11 +6,31 @@
 /*   By: lrecine- <lrecine-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:48:55 by lrecine-          #+#    #+#             */
-/*   Updated: 2024/11/06 13:44:56 by lrecine-         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:27:06 by lrecine-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strdup(const char *s)
+{
+	char	*str;
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen(s) + 1;
+	str = (char *)malloc(len);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
