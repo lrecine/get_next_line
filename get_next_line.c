@@ -6,7 +6,7 @@
 /*   By: lrecine- <lrecine-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:29:09 by lrecine-          #+#    #+#             */
-/*   Updated: 2024/11/06 16:28:38 by lrecine-         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:23:23 by lrecine-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_next_line(char *line)
 	i = -1;
 	while (++i, line[i] && line[i] != '\n')
 		next_line[i] = line[i];
-	if (line [i] == '\n')
+	if (line[i] == '\n')
 	{
 		next_line[i] = line[i];
 		i++;
